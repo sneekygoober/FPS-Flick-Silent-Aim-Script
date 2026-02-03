@@ -75,7 +75,7 @@ local getTarget = function(origin: Vector3)
     return cPart;
 end;
 
-local old; old = clonefunction(hookfunction(BulletHandler.Fire, newcclosure(function(args)
+local old; old = clonefunction(hookfunction(rawget(BulletHandler, "Fire"), newcclosure(function(args)
     if rawget(args, "Origin") and rawget(args, "Direction") then
         local c = getTarget(rawget(args, "Origin"));
         if c then
