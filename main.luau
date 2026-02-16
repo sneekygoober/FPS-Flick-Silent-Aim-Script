@@ -68,9 +68,7 @@ local getTarget = function(origin: Vector3)
 
         if nTPart then tPart = nTPart; end;
 
-        local __ = mouse and {mouse.X, mouse.Y} or {0, 0};
-
-        local distance = (Vector2.new(pos.X, pos.Y) - Vector2.new(unpack(__))).Magnitude;
+        local distance = mouse and (Vector2.new(pos.X, pos.Y) - Vector2.new(mouse.X, mouse.Y)).Magnitude or Vector2.new(pos.X, pos.Y).Magnitude;
         if distance < cDistance then
             cPart = tPart;
             cDistance = distance;
