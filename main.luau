@@ -50,13 +50,13 @@ local isVisible = function(part: BasePart, origin: Vector3): (boolean, Instance?
 end;
 
 local getTarget = function(origin: Vector3)
-    local cPart, cDistance = nil, math.huge;
+    local cPart, cDistance = nil, getgenv().fov or 300;
 
     for _, player: Player in next, Players:GetPlayers() do
         if player == plr then continue; end;
 
         local char = player.Character;
-        if not char or char:FindFirstChildOfClass("ForceField") or (char:FindFirstChild("Humanoid") and char.Humanoid.Health <= 0) then continue; end;
+        if not char or char:FindFirstChild("INV") or (char:FindFirstChild("Humanoid") and char.Humanoid.Health <= 0) then continue; end;
 
         local tPart: BasePart = char:FindFirstChild("Head") or char.PrimaryPart or char:FindFirstChild("HumanoidRootPart");
         if not tPart then continue; end;
@@ -81,6 +81,8 @@ local getTarget = function(origin: Vector3)
     
     return cPart;
 end;
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sneekygoober/sneeky-s-fov-lib/refs/heads/main/main.luau"))()(getgenv().fov or 300, getTarget);
 
 local old; old = clonefunction(hookfunction(rawget(BulletHandler, "Fire"), newcclosure(function(args)
     if rawget(args, "Origin") and rawget(args, "Direction") then
